@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Experiments | CSS Variables</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="css/style.css" rel="stylesheet"> -->
+    </head>
+    <body>
+        <div class="left-pane">
+            <div class="controls-module">
+                <h3>Filters</h3>
+                <div class="bars-container">
+                    
+                    <h5>Blur</h5>
+                    <div class="bar-row">
+                        <div class="progress" name="blur">
+                            <div class="progress-bar" name="blur" data-min="0" data-max="100" data-value="0" data-unit="px" style="width: 0%"></div>
+                        </div>
+                        <button class="minus" name="blur">-</button>
+                        <button class="plus" name="blur">+</button>
+                    </div>
+                    
+                    
+                    <h5>Grayscale</h5>
+                    <div class="bar-row">
+                        <div class="progress" name="grayscale">
+                            <div class="progress-bar" name="grayscale" data-min="0" data-max="100" data-value="50" data-unit="%" style="width: 50%"></div>
+                        </div>
+                        <button class="minus" name="grayscale">-</button>
+                        <button class="plus" name="grayscale">+</button>
+                    </div>
+
+                    <h5>Sepia</h5>
+                    <div class="bar-row">
+                        <div class="progress" name="sepia">
+                            <div class="progress-bar" name="sepia" data-min="0" data-max="100" data-value="50" data-unit="%" style="width: 50%"></div>
+                        </div>
+                        <button class="minus" name="sepia">-</button>
+                        <button class="plus" name="sepia">+</button>
+                    </div>
+
+                    <h5>Opacity</h5>
+                    <div class="bar-row">
+                        <div class="progress" name="opacity">
+                            <div class="progress-bar" name="opacity" data-min="0" data-max="100" data-value="100" data-unit="%" style="width: 100%"></div>
+                        </div>
+                        <button class="minus" name="opacity">-</button>
+                        <button class="plus" name="opacity">+</button>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="controls-module">
+                <h3>Habits</h3>
+                <div class="bars-container">
+                    
+                    <h5>Habits</h5>
+                    <div class="bar-row">
+                        <div class="progress" name="habits">
+                            <div class="progress-bar" name="habits" data-min="0" data-max="100" data-value="50" data-unit="%" style="width: 50%"></div>
+                        </div>
+                        <button class="minus" name="habits">-</button>
+                        <button class="plus" name="habits">+</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+        </div>
+
+        <style>
+        /* VARIABLES */
+   
+        /* STYLES */
+        html{
+            background: #13A89E;
+            font-family: Arial, sans-serif;
+            --habits: 50%;
+            --opacity: 100%;
+            --sepia: 50%;
+            --grayscale: 50%;
+            --blur: 0px;
+          
+        }
+        body{
+            display: flex;
+            justify-content: flex-start;
+            padding: 50px;
+        }
+        h5{
+            margin-bottom: 0;
+        }
+
+        img{
+            width: 70%;
+            height: auto;
+            filter: blur(var(--blur)) sepia(var(--sepia)) grayscale(var(--grayscale)) opacity(var(--opacity));
+            transition: all 0.2s ease-in-out;
+        }
+
+        .left-pane{
+            width: 30%;
+        }
+        .content{
+            width: 70%;
+            margin-left: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        .controls-module{
+            border-radius: 6px;
+            overflow: hidden;
+            background: lightgray;
+            padding: 0 20px 20px 20px;
+            margin-bottom: 20px;
+        }
+        .bars-container{
+            width: 100%;
+        }
+        .bar-row{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 16px;
+        }
+        .progress{
+            height: 10px;
+            width: 100%;
+            background: #BEB2B2;
+            border-radius: 50px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .progress-bar{
+            height: 100%;
+            background: blueviolet;
+            transition: all 0.2s ease-in-out;
+        }
+        button{
+            padding: 5px 10px;
+            border: none;
+            outline: none;
+            border-radius: 50%;
+            margin-left: 10px;
+            height: 25px;
+            width: 25px;
+        }
+        button:active{
+            border: 2px solid #2C2C2C;
+        }
+        .minus{
+            background: #FA3F3F;
+        }
+        .plus{
+            background: #3FC03F;
+        }
+    
+        </style>
+
+        <script>
+            //progress bars
+            const progressBars = document.querySelectorAll('.controls-module .progress-bar');
+            const barRows = document.querySelectorAll('.controls-module .bar-row');
+            //buttons
+            const minusButtons = document.querySelectorAll('.controls-module .minus');
+            const plusButtons = document.querySelectorAll('.controls-module .plus');
+            
+            function plusHandleBar(){
+                const progBar = this.parentElement.firstElementChild.firstElementChild;
+                const progressData = this.parentElement.firstElementChild.firstElementChild.dataset;
+                const suffix = progressData.unit || '';
+                const min = progressData.min;
+                const max = progressData.max;
+                const editName = this.name;
+
+                if(progressData.value < 0){
+                    progressData.value = 0;
+                }
+                if(progressData.value > 100){
+                    progressData.value = 100;
+                }
+
+          
+                    // console.log(document.documentElement.getAttribute('--opacity'))
+                    console.log(document.querySelector('img').getAttribute)
+                
+                if(document.documentElement.style.getPropertyValue(`${this.name}`) > 100){
+                    document.documentElement.style.setProperty(`--${this.name}`, progressData.value = 100 + suffix)
+                }
+                else if(document.documentElement.style.getPropertyValue(`${this.name}`) < 0){
+                    document.documentElement.style.setProperty(`--${this.name}`, progressData.value = 0 + suffix)
+                } 
+                else{
+                    document.documentElement.style.setProperty(`--${this.name}`, (progressData.value = progressData.value + 5 ) + suffix);
+
+                }
+
+                progBar.style.width = progressData.value + suffix;
+
+
+            }
+
+            function minusHandleBar(){
+                const progBar = this.parentElement.firstElementChild.firstElementChild;
+                const progressData = this.parentElement.firstElementChild.firstElementChild.dataset;
+                const suffix = progressData.unit || '';
+                const min = progressData.min;
+                const max = progressData.max;
+                const editName = this.name;
+                if(progressData.value < 0){
+                    progressData.value = 0;
+                }
+                if(progressData.value > 100){
+                    progressData.value = 100;
+                }
+
+
+
+                if(document.documentElement.style.getPropertyValue(`${this.name}`) > 100){
+                    document.documentElement.style.setProperty(`--${this.name}`, progressData.value = 100 + suffix)
+                }
+                else if(document.documentElement.style.getPropertyValue(`${this.name}`) < 0){
+                    document.documentElement.style.setProperty(`--${this.name}`, progressData.value = 0 + suffix)
+                }
+                else{
+                    document.documentElement.style.setProperty(`--${this.name}`, (progressData.value = progressData.value - 5 ) + suffix);
+                }
+                progBar.style.width = progressData.value + suffix;
+
+
+            }
+
+            barRows.forEach(function(barRow){
+                // barRow.children[0].firstElementChild.addEventListener('change', handleUpdate);
+                barRow.children[1].addEventListener('click', minusHandleBar);
+                barRow.children[2].addEventListener('click', plusHandleBar);
+
+            });
+
+      
+
+
+            
+        </script>
+    </body>
+</html>
